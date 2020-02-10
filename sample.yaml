@@ -1,0 +1,25 @@
+sample:
+  name: Bluetooth Central
+tests:
+  sample.cwd_development.central:
+    harness: bluetooth
+    platform_whitelist: qemu_cortex_m3 qemu_x86
+    tags: bluetooth
+  sample.usb.cdc-acm:
+    depends_on: usb_device gpio
+    tags: usb
+    harness: console
+    harness_config:
+      type: one_line
+      regex:
+        - "Wait for DTR"
+  sample.usb.cdc-acm.comp:
+    depends_on: usb_device gpio
+    tags: usb
+    extra_args: "-DOVERLAY_CONFIG=overlay-composite-cdc-msc.conf"
+    harness: console
+    harness_config:
+      type: one_line
+      regex:
+        - "Wait for DTR"
+
